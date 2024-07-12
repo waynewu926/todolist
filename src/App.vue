@@ -40,12 +40,14 @@ const items = ref([
 ])
 
 function add() {
-  items.value.push({
-    isCompleted: false,
-    task: content.value
-  });
+  if (content.value != '') {
+    items.value.push({
+      isCompleted: false,
+      task: content.value
+    });
   
-  content.value = '';
+    content.value = '';
+  }
 }
 
 function del(index) {
