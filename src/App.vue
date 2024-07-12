@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="title">TO-DO-LIST</div>
+    <div class="title">Todo-List</div>
 
     <div class="addBox">
       <input v-model="content" class="addContent" type="text" placeholder="Add a todo">
