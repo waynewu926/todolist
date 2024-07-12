@@ -3,36 +3,54 @@
     <div class="title">TO-DO-LIST</div>
 
     <div class="addBox">
-      <input class="addContent" type="text" placeholder="Add a todo">
-      <div class="addButton">add todo</div>
+      <input v-model="content" class="addContent" type="text" placeholder="Add a todo">
+      <div @click="add" class="addButton">add todo</div>
     </div>
 
-    <div class="item completed">
+    <div v-for="(item, index) in items" :key="index" :class="[item.isCompleted ? 'completed' : 'item']">
       <div>
-        <input type="checkbox">
-        <span class="name">have lunch</span>
+        <input v-model="item.isCompleted" type="checkbox">
+        <span class="name">{{ item.task }}</span>
       </div>
-      <div class="delete">delete</div>
-    </div>
-    <div class="item">
-      <div>
-        <input type="checkbox">
-        <span class="name">exercise</span>
-      </div>
-      <div class="delete">delete</div>
-    </div>
-    <div class="item">
-      <div>
-        <input type="checkbox">
-        <span class="name">study</span>
-      </div>
-      <div class="delete">delete</div>
+      <div @click="del(index)" class="delete">delete</div>
     </div>
 
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
+
+
+const content = ref('');
+
+const items = ref([
+  {
+    isCompleted: false,
+    task: 'have lunch'
+  },
+    {
+    isCompleted: false,
+    task: 'exercise' 
+  },
+  {
+    isCompleted: false,
+    task: 'study'
+  }
+])
+
+function add() {
+  items.value.push({
+    isCompleted: false,
+    task: content.value
+  });
+  
+  content.value = '';
+}
+
+function del(index) {
+  items.value.splice(index, 1);
+}
 
 </script>
 
@@ -112,6 +130,16 @@
     }
 
     .completed {
+      display: flex;
+      box-sizing: border-box;
+      width: 70%;
+      height: 50px;
+      margin: 8px auto;
+      padding: 16px;
+      border-radius: 20px;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 20px;
+      align-items: center;
+      justify-content: space-between;
       text-decoration: line-through;
       opacity: 40%;
     }
