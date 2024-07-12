@@ -25,25 +25,16 @@ import { ref } from 'vue';
 const content = ref('');
 
 const items = ref([
-  {
-    isCompleted: false,
-    task: 'have lunch'
-  },
-    {
-    isCompleted: false,
-    task: 'exercise' 
-  },
-  {
-    isCompleted: false,
-    task: 'study'
-  }
+  { task: 'have lunch', isCompleted: false },
+  { task: 'exercise', isCompleted: false },
+  { task: 'study', isCompleted: false }
 ])
 
 function add() {
   if (content.value != '') {
     items.value.push({
-      isCompleted: false,
-      task: content.value
+      task: content.value,
+      isCompleted: false
     });
   
     content.value = '';
